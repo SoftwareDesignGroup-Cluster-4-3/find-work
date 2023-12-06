@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "211594919374",
+    "project_id": "find-work-40b0d",
+    "storage_bucket": "find-work-40b0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211594919374:android:20b1b203245316ee113f9f",
+        "android_client_info": {
+          "package_name": "com.find_work"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATUogQUyD7k4Yp5uhOcBFB48cpuWaGBEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
