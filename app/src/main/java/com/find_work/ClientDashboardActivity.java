@@ -62,6 +62,7 @@ public class ClientDashboardActivity extends AppCompatActivity {
         btnMap = findViewById(R.id.btnMap);
         userEmail = findViewById(R.id.userDetails);
 
+        // check current user
         user = auth.getCurrentUser();
         if (user==null) {
             Intent client = new Intent(ClientDashboardActivity.this, LoginActivity.class);
@@ -73,18 +74,24 @@ public class ClientDashboardActivity extends AppCompatActivity {
             userEmail.setText(String.join("", actualEmail));
         }
 
+        // initialize text views using ID's
         txtName = findViewById(R.id.txtName);
         txtPhone = findViewById(R.id.txtPhone);
         txtAddress = findViewById(R.id.txtAddress);
 
+        // Initialize edit texts using ID's
         edtName = findViewById(R.id.edtName);
         edtPhone = findViewById(R.id.edtPhone);
         edtAddress = findViewById(R.id.edtAddress);
 
+        // edit details button
         editDetails = findViewById(R.id.editDetails);
+
+        // set On click listener to the edit details button
         editDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // check the button name
                 if (editDetails.getText().equals("Edit Details")) {
 
                     txtName.setVisibility(View.GONE);
@@ -99,6 +106,7 @@ public class ClientDashboardActivity extends AppCompatActivity {
                     edtPhone.setText(txtPhone.getText());
                     edtAddress.setText(txtAddress.getText());
 
+                    // set the button name as "Save Details"
                     editDetails.setText("Save Details");
 
                 } else if (editDetails.getText().equals("Save Details")) {
@@ -119,8 +127,10 @@ public class ClientDashboardActivity extends AppCompatActivity {
                     edtPhone.setVisibility(View.GONE);
                     edtAddress.setVisibility(View.GONE);
 
+                    // add most updated details to the firestore collection
                     addToFirestore(userEmail.getText().toString(), strName, strPhone, strAddress);
 
+                    // Change the button text as "Edit Details"
                     editDetails.setText("Edit Details");
 
                 }
