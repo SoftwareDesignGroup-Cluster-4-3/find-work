@@ -77,43 +77,45 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                String email, password;
-                if (userType.equals("Worker")) {
-                    email = "w-"+String.valueOf(loginEmail.getEditText().getText());
-                } else if (userType.equals("Client")) {
-                    email = "c-"+String.valueOf(loginEmail.getEditText().getText());
-                } else {
-                    email = "";
-                }
-                password = String.valueOf(loginPassword.getEditText().getText());
+                if (btnRegister.getText().equals("Register")){
+                    progressBar.setVisibility(View.VISIBLE);
+                    String email, password;
+                    if (userType.equals("Worker")) {
+                        email = "w-"+String.valueOf(loginEmail.getEditText().getText());
+                    } else if (userType.equals("Client")) {
+                        email = "c-"+String.valueOf(loginEmail.getEditText().getText());
+                    } else {
+                        email = "";
+                    }
+                    password = String.valueOf(loginPassword.getEditText().getText());
 
-                if (email.equals("w-") || email.equals("c-")) {
-                    Toast.makeText(RegisterActivity.this, "email is empty", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(RegisterActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    return;
-                }
+                    if (email.equals("w-") || email.equals("c-")) {
+                        Toast.makeText(RegisterActivity.this, "email is empty", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        return;
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        Toast.makeText(RegisterActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        return;
+                    }
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                                    btnRegister.setText("CLICK TO LOGIN");
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+                                        btnRegister.setText("CLICK TO LOGIN");
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(RegisterActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
 
                 if (btnRegister.getText().equals("CLICK TO LOGIN")) {
                     Intent client = new Intent(RegisterActivity.this, LoginActivity.class);
